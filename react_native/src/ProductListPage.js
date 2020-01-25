@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 import {View,Text, Image, StyleSheet, FlatList, TouchableHighlight} from 'react-native';
 import axios from 'axios';
 import {Container} from './Container';
-import LinearGradient from 'react-native-linear-gradient';
 import Colors from './Colors';
 import CellItem from './CellItem';
+import ProductHeader from './ProductHeader';
+import NavigationBar from './NavigationBar'
 
 class ProductListPage extends Component {
 
@@ -33,62 +34,24 @@ class ProductListPage extends Component {
         ;
     }
 
+    _onPressNavigationButton (){
+        console.log("navigation button pressed!")
+    }
 
     _renderHeader() {
-        return (
-            <View>
-                <View style={{marginLeft: 16, marginRight: 16}}>
-                    <LinearGradient colors={[Colors.bannerGradient1,Colors.bannerGradient1]} style={styles.gradientHeader}>
-                        <Image
-                            style={{height: 50,flex:1,width:'100%', }}
-                            resizeMode='contain'
-                            source={require('./assets/smiley.png')}/>
-                        <Text 
-                            style={{fontSize: 20, fontWeight: 'bold', color: '#ff5811', textAlign : 'center'}}>
-                            Buy your favourite SMILEY</Text>
-                    </LinearGradient>
-                </View>
-            </View>
-        );
+       return <ProductHeader/>
     }
 
     _renderItem(itemData){
-        return(
-            <CellItem item={itemData.item}></CellItem>
-        )
+        return <CellItem item={itemData.item}></CellItem>
     }
 
     render(){
         return (
             <Container>
-                <View style={{
-                    paddingLeft: 16,
-                    paddingRight: 16,
-                    paddingBottom: 14,
-                    paddingTop: 14,
-                    flexDirection: 'row',
-                }}>
-                    <Text style={{
-                        flex: 1,
-                        fontSize: 24,
-                        fontWeight: 'bold',
-                        color: Colors.grey50,
-                    }}>Products</Text>
-                    <TouchableHighlight style={{
-                        width: 34,
-                        height: 34,
-                        borderRadius: 17,
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                    }} underlayColor={Colors.grey300} onPress={() => this._moveToPage(PAGE_PAYMENT_HISTORY)}>
-                        <Image style={{
-                            width: 35,
-                            height: 35,
-                        }} source={require('./assets/ic_bag.png')}/>
-                    </TouchableHighlight>
-                </View>
+                <NavigationBar props={ {title : 'Products', onPress : this._onPressNavigationButton}}></NavigationBar>
                 <FlatList 
-                    ListHeaderComponent={this._renderHeader()}
+                    ListHeaderComponent={this._renderHeader}
                     data={this.state.listData}
                     renderItem={this._renderItem}
                     keyExtractor={this.state.listData.index}
@@ -105,14 +68,7 @@ class ProductListPage extends Component {
 export default ProductListPage;
 
 const styles = StyleSheet.create({
-    gradientHeader : {
-        marginTop : 20,
-        width: '100%',
-        height: 272,
-        borderRadius: 8,
-        padding: 16,
-        justifyContent: 'space-between',
-    },
+  
 })
 
 /**
