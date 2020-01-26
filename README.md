@@ -8,6 +8,6 @@
 if you got error, try to clean the gradle, go to 'android' folder, run ./gradlew clean and try reset cache npm
 
 
-![Alt text](ss1.jpeg?raw=true "SS1")
-![Alt text](ss2.jpeg?raw=true "SS2")
-![Alt text](ss1.jpeg?raw=true "SS3")
+![Alt text](ss1.jpg?raw=true "SS1")
+![Alt text](ss2.jpg?raw=true "SS2")
+![Alt text](ss1.jpg?raw=true "SS3")
