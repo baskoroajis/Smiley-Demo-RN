@@ -14,7 +14,7 @@ export function dateToRelative(current, date) {
         return Math.round(elapsed/msPerDay) + ' days ago';   
     }
     else{
-        return date
+        return parsedDate.toDateString()
     }
   
 }

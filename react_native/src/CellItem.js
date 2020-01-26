@@ -1,21 +1,34 @@
 
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet,Image} from 'react-native';
 import React from 'react';
 import Colors from './utils/Colors';
 import {centToDollars, dateToRelative} from './utils/Helper';
+import {BASE_URL} from './utils/ApiRequest'
 
 export default CellItem = ({item})=>{
-
-    return(
-        <View style={styles.cellContainer}>
-            <View style={styles.imageContainer}>
-                <Text  style={[{fontSize:item.size},styles.textThumbnail]}>{item.face}</Text>
+    if (typeof item.type !== 'undefined'){
+        console.log('iteeem ', item.url)
+        return(
+            <View style={styles.cellContainer}>
+                <View style={styles.imageContainerAds}>
+                    <Image  style={styles.imageAds} source={{uri:BASE_URL+'ads/?r='+item.url}}></Image>
+                </View>
             </View>
-            <Text style={styles.textPrice}>{'$ '+centToDollars(item.price)}</Text>
-            <Text style={styles.textSize}>{'Size '+item.size}</Text>
-            <Text style={styles.textDate}>{''+dateToRelative(new Date(), item.date)}</Text>
-        </View>
-    )
+        )
+    }
+    else{
+        return(
+            <View style={styles.cellContainer}>
+                <View style={styles.imageContainer}>
+                    <Text  style={[{fontSize:item.size},styles.textThumbnail]}>{item.face}</Text>
+                </View>
+                <Text style={styles.textPrice}>{'$ '+centToDollars(item.price)}</Text>
+                <Text style={styles.textSize}>{'Size '+item.size}</Text>
+                <Text style={styles.textDate}>{''+dateToRelative(new Date(), item.date)}</Text>
+            </View>
+        )
+    }
+    
 }
 
 const styles = StyleSheet.create({
@@ -60,5 +73,15 @@ const styles = StyleSheet.create({
         borderRadius: 5,
         alignSelf : 'center',
         textAlignVertical : 'center'
+    },
+    imageContainerAds : {
+        flexGrow : 1,
+        height : 104,
+        padding: 1
+    },
+    imageAds : {
+        height: 100,
+        resizeMode:'cover', 
+        width : '100%'
     }
 })

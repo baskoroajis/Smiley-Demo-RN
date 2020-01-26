@@ -16,22 +16,46 @@ class ProductListPage extends Component {
         super(props)
         this.state = {
             listData : [],
-            isLoadingMore : false,
+            isEndCatalogue : false
         }
         this.page = 1
         this.limit = 20
         this.sort = ''
-        this.props.getProducts(this.page,this.limit)
+        this.lastRandomAds = Math.floor((Math.random() * 10))
+        this.lastIndexBannerAds = 0
+        this.props.getProducts(this.page,this.limit,undefined)
         this.onEndReachedCalledDuringMomentum = true
     }
 
     componentDidUpdate(prevProps){
         if (this.props !== prevProps){
             if (typeof this.props.products !== 'undefined'){
-                var newProduct = this.state.listData.concat(this.props.products)
-                console.log('newproduct ',newProduct)
-                this.setState({listData:newProduct})
+                if (Array.isArray(this.props.products) && this.props.products.length !== 0){
+                    var newProduct = this.state.listData.concat(this.props.products)
+                    var adsItem = {url : this._getRandomBannerAds(), type : 'ads', id : 'ads'+this.lastIndexBannerAds}
+                    var ProductWithAds = newProduct.concat(adsItem)
+                    this.lastIndexBannerAds += 1
+                    this.setState({listData:ProductWithAds})
+    
+                    //request for the next page when idle
+                    this.page = this.page + 1
+                    this.props.getProducts(this.page,this.limit,this.sort)
+                }
+                else{
+                    //set when end catalogue reach
+                    this.setState({isEndCatalogue : true})
+                }
             }
+        }
+    }
+
+    _getRandomBannerAds = () => {
+        var randomIndex = Math.floor((Math.random() * 10))
+        if (this.lastRandomAds !== randomIndex){
+           return randomIndex;
+        }
+        else{
+            this._getRandomBannerAds()
         }
     }
 
@@ -68,8 +92,9 @@ class ProductListPage extends Component {
         return <CellItem item={itemData.item}></CellItem>
     }
 
-    _renderFooter(){
-        return <LoadingFooter/>
+    _renderFooter(isEndCatalogue){
+        return <LoadingFooter isEndCatalogue={isEndCatalogue}/>
+
     }
 
     _renderView(){
@@ -87,7 +112,7 @@ class ProductListPage extends Component {
                 onEndReached={this._onEndReached.bind(this)}
                 onEndReachedThreshold={0.5}
                 onMomentumScrollBegin={() => { this.onEndReachedCalledDuringMomentum = false; }}
-                ListFooterComponent={this._renderFooter}
+                ListFooterComponent={this._renderFooter(this.state.isEndCatalogue)}
                 >
             </FlatList>
             )
@@ -116,8 +141,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(mapStateToProps,mapDispatchToProps)(ProductListPage);
-
-/**
- * 
- * {"index": 47, "item": {"date": "Mon Jan 13 2020 15:37:38 GMT+0700 (Western Indonesia Time)", "face": "(｀◔ ω ◔´)", "id": "59710-t0qfwgzm6vl", "price": 859, "size": 24}
- */
