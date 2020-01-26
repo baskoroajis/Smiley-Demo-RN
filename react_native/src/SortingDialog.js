@@ -14,7 +14,6 @@ class SortingDialog extends Component {
         this._hideWindow = this._hideWindow.bind(this);
         this._showWindow = this._showWindow.bind(this);
         this._continueBtnClicked = this._continueBtnClicked.bind(this);
-        // this._negativeBtnClicked = this._negativeBtnClicked.bind(this);
         this.state = {
             isWindowShowed: false,
             selectedPosition: -1,
@@ -39,13 +38,10 @@ class SortingDialog extends Component {
         }).start();
     }
 
-    _continueBtnClicked() {
-        this.props.setPositiveBtnAction();
+    _continueBtnClicked(index) {
+        console.log('index ',index)
+        this.props.setPositiveBtnAction(index);
     }
-
-    // _negativeBtnClicked() {
-    //     this.props.setNegativeBtnAction();
-    // }
 
     componentDidMount() {
         this.props.setClickShow(this._showWindow);
@@ -88,9 +84,9 @@ class SortingDialog extends Component {
                                   this.setState({selectedPosition: 1})
                               }} checked={selectedPosition === 1} title='Sort By Price'/>
                                <RadioButton onPress={() => {
-                                  this.setState({selectedPosition: 1})
-                              }} checked={selectedPosition === 1} title='Sort By Id'/>
-                              <Button title='Select' buttonStyle={styles.selectButton} ></Button>
+                                  this.setState({selectedPosition: 2})
+                              }} checked={selectedPosition === 2} title='Sort By Id'/>
+                              <Button title='Select' buttonStyle={styles.selectButton} onPress={() => this._continueBtnClicked(selectedPosition)}></Button>
                            
                           </View>
                       </View>

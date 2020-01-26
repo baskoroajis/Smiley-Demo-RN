@@ -1,16 +1,17 @@
 
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
+import Colors from './utils/Colors';
 
 export default CellItem = ({item})=>{
     return(
         <View style={styles.cellContainer}>
-            <View style={styles.imageContainerStyle}>
+            <View style={styles.imageContainer}>
                 <Text  style={[{fontSize:item.size},styles.textThumbnail]}>{item.face}</Text>
             </View>
-            <Text style={styles.textPriceStyle}>{'Size : '+item.size}</Text>
-            <Text style={styles.textPriceStyle}>{'$ '+item.price}</Text>
-            <Text style={styles.textPriceStyle}>{'date : '+item.date}</Text>
+            <Text style={styles.textPrice}>{'$ '+item.price}</Text>
+            <Text style={styles.textSize}>{'Size '+item.size}</Text>
+            <Text style={styles.textDate}>{item.date}</Text>
         </View>
     )
 }
@@ -23,20 +24,33 @@ const styles = StyleSheet.create({
         padding : 16,
         maxWidth: '50%'
     },
-    imageContainerStyle : {
+    imageContainer : {
         flexGrow : 1,
         height : 104,
         borderRadius: 5,
         borderColor : "#c7c7c7",
         borderWidth : 1,
-        padding: 8
+        padding: 1
     },
-    textPriceStyle : {
+    textSize: {
+        color : Colors.grey50,
+        marginTop : 2,
+        marginLeft : 8,
+        fontSize : 13,
+        fontWeight : "bold",
+    },
+    textPrice: {
         color : "#ff5811",
         marginTop : 2,
         marginLeft : 8,
         fontSize : 14,
         fontWeight : "bold",
+    },
+    textDate: {
+        color : Colors.grey40,
+        marginTop : 2,
+        marginLeft : 8,
+        fontSize : 11,
     },
     textThumbnail : {
         flex : 1,
