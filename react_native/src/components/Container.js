@@ -2,7 +2,6 @@
 
 import React from 'react';
 import { SafeAreaView, View, KeyboardAvoidingView, StyleSheet, StatusBar, Dimensions } from 'react-native';
-// import { , StatusBarHeight } from '../../../utils/Helper';
 
 
 function isIPhoneXSize(dim) {
@@ -56,7 +55,6 @@ const Container = ({ safeArea, style, headerTransparent, children }) => {
     )
 };
 
-// Styles
 const styles = StyleSheet.create({
     container: {
         flex: 1

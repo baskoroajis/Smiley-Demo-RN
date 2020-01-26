@@ -6,7 +6,7 @@ export default NavigationBar = ({props}) =>{
         <View style={styles.container}>
             <Text style={styles.navigationTitle}>{props.title}</Text>
             <TouchableHighlight underlayColor= {Colors.grey300} style={styles.rightButton} onPress={props.onPress}>
-                <Image style={styles.rightImage} source={require('./assets/ic_bag.png')}/>
+                <Image style={styles.rightImage} source={require('../assets/ic_filter.png')}/>
             </TouchableHighlight>
         </View>
     )
@@ -35,8 +35,8 @@ const styles = StyleSheet.create({
         
     },
     rightImage : {
-        width: 35,
-        height: 35,
+        width: 27,
+        height: 27,
     }
 })
 

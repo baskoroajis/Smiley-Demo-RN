@@ -4,4 +4,6 @@ export default Colors = ({
     white : '#FFF',
     grey50: '#27293F',
     grey300: '#E1E6ED',
+    grey40: '#697586',
+    orange: '#FF5811',
 })

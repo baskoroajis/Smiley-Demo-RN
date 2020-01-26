@@ -8,7 +8,7 @@ export default ProductHeader = () => {
         <View style={styles.container}>
             <LinearGradient colors={[Colors.bannerGradient1,Colors.bannerGradient1]} style={styles.background}>
                 <Image style={styles.image} source={require('./assets/smiley.png')}/>
-                <Text style={styles.text}> Buy your favourite SMILEY</Text>
+                <Text style={styles.text}> Buy your favourite FACES</Text>
             </LinearGradient>
         </View>
     );

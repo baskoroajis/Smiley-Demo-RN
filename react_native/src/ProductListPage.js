@@ -1,11 +1,12 @@
 import React, {Component} from 'react';
 import {View,Text, Image, StyleSheet, FlatList, TouchableHighlight} from 'react-native';
 import axios from 'axios';
-import {Container} from './Container';
-import Colors from './Colors';
+import {Container} from './components/Container';
+import Colors from './utils/Colors';
 import CellItem from './CellItem';
 import ProductHeader from './ProductHeader';
-import NavigationBar from './NavigationBar'
+import NavigationBar from './components/NavigationBar';
+import SortingDialog from './SortingDialog';
 
 class ProductListPage extends Component {
 
@@ -17,14 +18,8 @@ class ProductListPage extends Component {
         }
     }
 
-    static navigationOptions = ({navigation}) => ({
-        header: null,
-        headerTransparent: true,
-    });
-
     componentDidMount() {
         axios.get('http://192.168.0.7:3000/products').then((response) => {
-            // console.log('response is ',response.data);
             this.setState({listData:response.data})
         })
         .catch(function (error) {
@@ -32,10 +27,6 @@ class ProductListPage extends Component {
             console.log(error);
         })
         ;
-    }
-
-    _onPressNavigationButton (){
-        console.log("navigation button pressed!")
     }
 
     _renderHeader() {
@@ -49,6 +40,7 @@ class ProductListPage extends Component {
     render(){
         return (
             <Container>
+                <SortingDialog setClickShow={click => this._onPressNavigationButton = click}  setHideWindow={click => this._hideDeleteDialog = click}/>
                 <NavigationBar props={ {title : 'Products', onPress : this._onPressNavigationButton}}></NavigationBar>
                 <FlatList 
                     ListHeaderComponent={this._renderHeader}
