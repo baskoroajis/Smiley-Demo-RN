@@ -4,11 +4,11 @@ export const IS_FAILED = 'IS_FAILED';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 
-export function getProducts(){
-    //params = [limit,page,type_id]
+export function getProducts(page,limit,sort){
+    params = [page,limit,sort]
     return{
       type: GET_PRODUCTS,
-     // params : params,
+      params : params,
     }
   }
   

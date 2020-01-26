@@ -2,16 +2,18 @@
 import {View, Text, StyleSheet} from 'react-native';
 import React from 'react';
 import Colors from './utils/Colors';
+import {centToDollars, dateToRelative} from './utils/Helper';
 
 export default CellItem = ({item})=>{
+
     return(
         <View style={styles.cellContainer}>
             <View style={styles.imageContainer}>
                 <Text  style={[{fontSize:item.size},styles.textThumbnail]}>{item.face}</Text>
             </View>
-            <Text style={styles.textPrice}>{'$ '+item.price}</Text>
+            <Text style={styles.textPrice}>{'$ '+centToDollars(item.price)}</Text>
             <Text style={styles.textSize}>{'Size '+item.size}</Text>
-            <Text style={styles.textDate}>{item.date}</Text>
+            <Text style={styles.textDate}>{''+dateToRelative(new Date(), item.date)}</Text>
         </View>
     )
 }

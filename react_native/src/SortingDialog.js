@@ -21,7 +21,6 @@ class SortingDialog extends Component {
     }
 
     _hideWindow() {
-        console.log('hide window called!')
         Animated.timing(this.moveAnimation, {
             toValue: {x: 0, y: this.DEFAULT_OFFSET},
             duration: 150,
@@ -39,8 +38,9 @@ class SortingDialog extends Component {
     }
 
     _continueBtnClicked(index) {
-        console.log('index ',index)
         this.props.setPositiveBtnAction(index);
+        this._hideWindow();
+
     }
 
     componentDidMount() {

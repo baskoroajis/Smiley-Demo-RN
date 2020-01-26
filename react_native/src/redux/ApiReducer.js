@@ -26,7 +26,6 @@ function requestData(state = initialState, action) {
         case IS_SUCCESS: {
              switch (action.api_type){
                  case (GET_PRODUCTS):{
-                     console.log('action data ', action.data)
                      return {...state,products: {data : action.data,loading: false}}
                  }
               
