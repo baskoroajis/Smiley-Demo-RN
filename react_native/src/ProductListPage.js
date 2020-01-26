@@ -40,7 +40,6 @@ class ProductListPage extends Component {
     render(){
         return (
             <Container>
-                <SortingDialog setClickShow={click => this._onPressNavigationButton = click}  setHideWindow={click => this._hideDeleteDialog = click}/>
                 <NavigationBar props={ {title : 'Products', onPress : this._onPressNavigationButton}}></NavigationBar>
                 <FlatList 
                     ListHeaderComponent={this._renderHeader}
@@ -48,8 +47,8 @@ class ProductListPage extends Component {
                     renderItem={this._renderItem}
                     keyExtractor={this.state.listData.index}
                     numColumns={2}>
-
                 </FlatList>
+                <SortingDialog setClickShow={click => this._onPressNavigationButton = click}  setHideWindow={click => this._hideDeleteDialog = click}/>
             </Container>
             )
     }

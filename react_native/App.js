@@ -27,7 +27,6 @@ const MainTabs = createBottomTabNavigator(
     defaultNavigationOptions: ({ navigation }) => ({
       tabBarIcon: ({ focused, horizontal, tintColor }) => {
         const { routeName } = navigation.state;
-        console.log('route name is ', routeName)
         if (routeName === 'Home') {
           return (
             <Image

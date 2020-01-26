@@ -14,7 +14,7 @@ class SortingDialog extends Component {
         this._hideWindow = this._hideWindow.bind(this);
         this._showWindow = this._showWindow.bind(this);
         this._continueBtnClicked = this._continueBtnClicked.bind(this);
-        this._negativeBtnClicked = this._negativeBtnClicked.bind(this);
+        // this._negativeBtnClicked = this._negativeBtnClicked.bind(this);
         this.state = {
             isWindowShowed: false,
             selectedPosition: -1,
@@ -22,6 +22,7 @@ class SortingDialog extends Component {
     }
 
     _hideWindow() {
+        console.log('hide window called!')
         Animated.timing(this.moveAnimation, {
             toValue: {x: 0, y: this.DEFAULT_OFFSET},
             duration: 150,
@@ -42,9 +43,9 @@ class SortingDialog extends Component {
         this.props.setPositiveBtnAction();
     }
 
-    _negativeBtnClicked() {
-        this.props.setNegativeBtnAction();
-    }
+    // _negativeBtnClicked() {
+    //     this.props.setNegativeBtnAction();
+    // }
 
     componentDidMount() {
         this.props.setClickShow(this._showWindow);
@@ -57,7 +58,7 @@ class SortingDialog extends Component {
         if (isWindowShowed === true) {
             return (
               <View style={styles.windowContainer}>
-                  <TouchableWithoutFeedback onPress={() => this._negativeBtnClicked()}>
+                  <TouchableWithoutFeedback onPress={() => this._hideWindow()}>
                       <View style={styles.grayBackground}/>
                   </TouchableWithoutFeedback>
                   <Animated.View style={[this.moveAnimation.getLayout()]}>
@@ -67,7 +68,7 @@ class SortingDialog extends Component {
                               <View style={styles.grayRect}/>
                               <View style={styles.topContainer}>
                                   <Text style={styles.popupTitle}>Sorting</Text>
-                                  <TouchableOpacity onPress={() => this._negativeBtnClicked()}>
+                                  <TouchableOpacity onPress={() => this._hideWindow()}>
                                       <Image style={styles.buttonClose}
                                              source={require('./assets/ic_close.png')}/>
                                   </TouchableOpacity>
