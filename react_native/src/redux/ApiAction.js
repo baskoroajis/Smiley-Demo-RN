@@ -4,8 +4,8 @@ export const IS_FAILED = 'IS_FAILED';
 
 export const GET_PRODUCTS = 'GET_PRODUCTS';
 
-export function getProducts(page,limit,sort,indexAds){
-    params = [page,limit,sort,indexAds]
+export function getProducts(page,limit,sort){
+    params = [page,limit,sort]
     return{
       type: GET_PRODUCTS,
       params : params,
