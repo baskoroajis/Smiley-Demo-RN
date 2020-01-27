@@ -7,7 +7,6 @@ import {BASE_URL} from './utils/ApiRequest'
 
 export default CellItem = ({item})=>{
     if (typeof item.type !== 'undefined'){
-        console.log('iteeem ', item.url)
         return(
             <View style={styles.cellContainer}>
                 <View style={styles.imageContainerAds}>
