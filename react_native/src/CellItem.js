@@ -1,33 +1,38 @@
 
 import {View, Text, StyleSheet,Image} from 'react-native';
-import React from 'react';
+import React, {PureComponent} from 'react';
 import Colors from './utils/Colors';
 import {centToDollars, dateToRelative} from './utils/Helper';
 import {BASE_URL} from './utils/ApiRequest'
 
-export default CellItem = ({item})=>{
-    if (typeof item.type !== 'undefined'){
-        return(
-            <View style={styles.cellContainer}>
-                <View style={styles.imageContainerAds}>
-                    <Image  style={styles.imageAds} source={{uri:BASE_URL+'ads/?r='+item.url}}></Image>
-                </View>
-            </View>
-        )
+export default class CellItem extends PureComponent {
+    constructor(props){
+        super(props)
+        this.item = props.item
     }
-    else{
-        return(
-            <View style={styles.cellContainer}>
-                <View style={styles.imageContainer}>
-                    <Text  style={[{fontSize:item.size},styles.textThumbnail]}>{item.face}</Text>
+    render(){
+        if (typeof  this.item.type !== 'undefined'){
+            return(
+                <View style={styles.cellContainer}>
+                    <View style={styles.imageContainerAds}>
+                        <Image  style={styles.imageAds} source={{uri:BASE_URL+'ads/?r='+ this.item.url}}></Image>
+                    </View>
                 </View>
-                <Text style={styles.textPrice}>{'$ '+centToDollars(item.price)}</Text>
-                <Text style={styles.textSize}>{'Size '+item.size}</Text>
-                <Text style={styles.textDate}>{''+dateToRelative(new Date(), item.date)}</Text>
-            </View>
-        )
+            )
+        }
+        else{
+            return(
+                <View style={styles.cellContainer}>
+                    <View style={styles.imageContainer}>
+                        <Text  style={[{fontSize:this.item.size},styles.textThumbnail]}>{ this.item.face}</Text>
+                    </View>
+                    <Text style={styles.textPrice}>{'$ '+centToDollars( this.item.price)}</Text>
+                    <Text style={styles.textSize}>{'Size '+ this.item.size}</Text>
+                    <Text style={styles.textDate}>{''+dateToRelative(new Date(),  this.item.date)}</Text>
+                </View>
+            )
+        }
     }
-    
 }
 
 const styles = StyleSheet.create({
